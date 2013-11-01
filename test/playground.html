@@ -164,6 +164,12 @@
         'typeahead:closed'
       ].join(' '), logToTextarea);
 
+      $('.tt-dropdown-menu').on([
+        'typeahead:cursorRemoved',
+        'typeahead:cursorMoved',
+        'typeahead:suggestionsRendered'].join(' '), logToTextarea);
+
+
       function logToTextarea($e) {
         var $textarea = $('.triggered-events'),
             val = $textarea.val(),
