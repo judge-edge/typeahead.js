@@ -84,7 +84,7 @@ var DropdownView = (function() {
 
       if (nextIndex === -1) {
         this.trigger('cursorRemoved');
-
+        this.$menu.trigger('typeahead:cursorRemoved');
         return;
       }
 
@@ -100,6 +100,7 @@ var DropdownView = (function() {
       this._ensureVisibility($underCursor);
 
       this.trigger('cursorMoved', extractSuggestion($underCursor));
+      this.$menu.trigger('typeahead:cursorMoved', extractSuggestion($underCursor));
     },
 
     _getSuggestions: function() {
@@ -255,6 +256,7 @@ var DropdownView = (function() {
       }
 
       this.trigger('suggestionsRendered');
+      this.$menu.trigger('typeahead:suggestionsRendered');
     },
 
     clearSuggestions: function(datasetName) {

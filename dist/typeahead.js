@@ -741,6 +741,7 @@
                 nextIndex = (nextIndex + 1) % ($suggestions.length + 1) - 1;
                 if (nextIndex === -1) {
                     this.trigger("cursorRemoved");
+                    this.$menu.trigger("typeahead:cursorRemoved");
                     return;
                 } else if (nextIndex < -1) {
                     nextIndex = $suggestions.length - 1;
@@ -748,6 +749,7 @@
                 $underCursor = $suggestions.eq(nextIndex).addClass("tt-is-under-cursor");
                 this._ensureVisibility($underCursor);
                 this.trigger("cursorMoved", extractSuggestion($underCursor));
+                this.$menu.trigger("typeahead:cursorMoved", extractSuggestion($underCursor));
             },
             _getSuggestions: function() {
                 return this.$menu.find(".tt-suggestions > .tt-suggestion");
@@ -838,6 +840,7 @@
                     this.clearSuggestions(dataset.name);
                 }
                 this.trigger("suggestionsRendered");
+                this.$menu.trigger("typeahead:suggestionsRendered");
             },
             clearSuggestions: function(datasetName) {
                 var $datasets = datasetName ? this.$menu.find(".tt-dataset-" + datasetName) : this.$menu.find('[class^="tt-dataset-"]'), $suggestions = $datasets.find(".tt-suggestions");
